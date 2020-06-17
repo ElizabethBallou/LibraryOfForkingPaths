@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - destroyable
+  - DialogueBox
+  - ChoiceButton1
+  - ChoiceButton2
+  - ChoiceButton3
+  - ItemDatabase
+  - isItem
+  - BookText
+  - Canvas
+  - NPC
+  - continueButton
+  - ExitButton
+  - book
+  - Maze
+  - wheel
+  - cipher0
+  - cipher1
+  - cipher2
+  - booktextbox
+  - openBook
+  - closedBook
+  - zoomedShelf
+  - bookTitle
+  - total
+  - catalogue
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Doors
+  - Maze
+  - Interactable
+  - Wheel
+  - Numbers
+  - Thought Bubbles
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
