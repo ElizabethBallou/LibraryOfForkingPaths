@@ -121,6 +121,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &43245509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43245511}
+  - component: {fileID: 43245510}
+  m_Layer: 0
+  m_Name: BookManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &43245510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43245509}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aa462b80392e4b449849f389174bd4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceMaterials:
+  - {fileID: 4900000, guid: 87cd595ae322ae544a39febe3974dc6f, type: 3}
+  - {fileID: 4900000, guid: 6bfb82b15a80d6c40b22086d5f91fb65, type: 3}
+  - {fileID: 4900000, guid: 0d23c0644597fd046a7d6a4f5270e9ed, type: 3}
+  - {fileID: 4900000, guid: 831f342f4fb77884ca348b67350423a2, type: 3}
+  - {fileID: 4900000, guid: 714e4e592bdc93043b3124c674e82638, type: 3}
+  leftPageText: {fileID: 8876120331226019213}
+  rightPageText: {fileID: 769847398964760740}
+  ChunkSize: 17
+  WordChunkLength: 15
+  leftButton: {fileID: 2955002993800016646}
+  rightButton: {fileID: 2955002994222211784}
+  exitButton: {fileID: 6814967133181480555}
+  bookTitle: {fileID: 328816168}
+--- !u!4 &43245511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43245509}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 38.077827, y: 110.13606, z: -118.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &328816166
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 185, y: 85.16}
+  m_AnchoredPosition: {x: 205, y: 85.16}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328816168
@@ -728,7 +785,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &682948191
 GameObject:
@@ -809,7 +866,7 @@ Transform:
   m_LocalScale: {x: 0.8999999, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &726699169
 GameObject:
@@ -1128,7 +1185,7 @@ Transform:
   - {fileID: 1538747141}
   - {fileID: 472666449}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1096577782
 GameObject:
@@ -1552,7 +1609,7 @@ RectTransform:
   - {fileID: 1777529765}
   - {fileID: 726699170}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1650,7 +1707,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1635497557}
   - component: {fileID: 1635497559}
-  - component: {fileID: 1635497558}
   m_Layer: 5
   m_Name: BookRandomizer
   m_TagString: Untagged
@@ -1678,24 +1734,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1635497558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1635497556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6aa462b80392e4b449849f389174bd4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChunkSize: 17
-  WordChunkLength: 10
-  leftButton: {fileID: 2955002993800016646}
-  rightButton: {fileID: 2955002994222211784}
-  exitButton: {fileID: 6814967133181480555}
-  bookTitle: {fileID: 328816168}
 --- !u!222 &1635497559
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4908,7 +4946,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1635497558}
+      - m_Target: {fileID: 43245510}
         m_MethodName: ChooseRandomString
         m_Mode: 1
         m_Arguments:
@@ -5030,7 +5068,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1635497558}
+      - m_Target: {fileID: 43245510}
         m_MethodName: ChooseRandomString
         m_Mode: 1
         m_Arguments:

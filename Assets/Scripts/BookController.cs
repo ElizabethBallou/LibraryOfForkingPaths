@@ -12,12 +12,11 @@ using Random = UnityEngine.Random;
 public class BookController : MonoBehaviour
 {
     public static BookController instance;
-
-    private TextMeshProUGUI leftPageText;
-    private TextMeshProUGUI rightPageText;
-    private List<string> sourceTextList;
-    private List<string> sourceTextFileLocation;
-    private string megaString;
+    public List<TextAsset> sourceMaterials;
+    public TextMeshProUGUI leftPageText;
+    public TextMeshProUGUI rightPageText;
+    private List<string> sourceMaterialsToString;
+    private string megaString; //a massive string with all the words from every source text
     private string RandomString;
     public int ChunkSize; //how many chunks will be printed into the text object
     public int WordChunkLength = 0; //how many words are in each chunk
@@ -35,29 +34,21 @@ public class BookController : MonoBehaviour
         instance = this;
 
         megaString = "";
-        sourceTextFileLocation = new List<string>();
-        sourceTextList = new List<string>();
+        sourceMaterialsToString = new List<string>();
 
-
-        //locate the source .txt file
-        string ArabianNightsSourceTextPath = "Assets/Resources/Procedural_Text/Arabian Nights text.txt";
-        sourceTextFileLocation.Add(ArabianNightsSourceTextPath);
-        string TheogonySourceTextPath = "Assets/Resources/Procedural_Text/Theogony text.txt";
-        sourceTextFileLocation.Add(TheogonySourceTextPath);
-        string PopolVuhSourceTextPath = "Assets/Resources/Procedural_Text/Popol Vuh text.txt";
-        sourceTextFileLocation.Add(PopolVuhSourceTextPath);
-        Debug.Log("The count of sourceTextFileLocation is " + sourceTextFileLocation.Count);
-        //get all the text of the book
-        for (int i = 0; i < sourceTextFileLocation.Count; i++)
+        foreach (TextAsset story in sourceMaterials)
         {
-            sourceTextList.Add(File.ReadAllText(sourceTextFileLocation[i]));
+            sourceMaterialsToString.Add(story.text);
+        }
+        Debug.Log("The length of sourcematerialstostring is " + sourceMaterialsToString);
+
+        foreach (string wordsFromThisStory in sourceMaterialsToString)
+        {
+            megaString += wordsFromThisStory;
         }
 
-        foreach (var epicText in sourceTextList)
-        {
-            megaString += epicText;
-        }
-
+        //put our new megaString through a function that removes characters we don't want
+        StoryTextCleaner(megaString);
 
         for (int i = 0; i < megaString.Length; i++)
         {
@@ -82,14 +73,26 @@ public class BookController : MonoBehaviour
 
     private void Start()
     {
-        leftPageText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-        rightPageText = transform.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>();
-
 
     }
 
-    // Update is called once per frame
+    private string StoryTextCleaner(string story)
+    {
+        foreach (Char thisLetter in story)
+        {
+            var forbiddenCharacters = new char[] {'*', '%', '#', '^', '\n', '+', '~', '<', '>', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '[', ']' };
 
+            foreach (var forbiddenOne in forbiddenCharacters)
+            {
+                if (thisLetter == forbiddenOne)
+                {
+                    story.Remove(thisLetter);
+
+                }
+            }
+        }
+        return story;
+    }
 
     private string UppercaseFirst(string toModify)
     {
@@ -106,9 +109,10 @@ public class BookController : MonoBehaviour
         return Char.ToUpper(toModify[0]).ToString();
     }
 
-    private string RemovePunctuation(string toModify)
+    private string TitleCleaner(string toModify)
     {
-        var charsToRemove = new string[] { ",", ".", "!", "?", ";", ":" };
+        //remove punctuation and numbers from source material
+        var charsToRemove = new string[] { ",", ".", "!", "?", ";", ":", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
         foreach (var c in charsToRemove)
         {
             toModify = toModify.Replace(c, string.Empty);
@@ -139,7 +143,7 @@ public class BookController : MonoBehaviour
         for (int i = 0; i < fiveWordTitleString.Length - 1; i++)
         {
             fiveWordTitleString[i] = UppercaseFirst(fiveWordTitleString[i]);
-            fiveWordTitleString[i] = RemovePunctuation(fiveWordTitleString[i]);
+            fiveWordTitleString[i] = TitleCleaner(fiveWordTitleString[i]);
         }
 
         switch (Random.Range(0, 4))
