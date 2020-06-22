@@ -4,31 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - destroyable
-  - DialogueBox
-  - ChoiceButton1
-  - ChoiceButton2
-  - ChoiceButton3
-  - ItemDatabase
-  - isItem
-  - BookText
-  - Canvas
-  - NPC
-  - continueButton
-  - ExitButton
-  - book
-  - Maze
-  - wheel
-  - cipher0
-  - cipher1
-  - cipher2
-  - booktextbox
   - openBook
   - closedBook
-  - zoomedShelf
-  - bookTitle
-  - total
-  - catalogue
+  - LeftPageText
+  - RightPageText
+  - RandomizeLeft
+  - RandomizeRight
+  - BookTitle
   layers:
   - Default
   - TransparentFX
