@@ -78,6 +78,7 @@ public class BookController : MonoBehaviour
         rightButton = GameObject.FindWithTag("RandomizeRight").GetComponent<Button>();
 
         bookTitle.gameObject.SetActive(false);
+
     }
 
     private string StoryTextCleaner(string story)
@@ -140,6 +141,7 @@ public class BookController : MonoBehaviour
 
     public string FormatRandomBookTitle()
     {
+        //This function chooses a title by picking a random chunk, then creating a five-word string from that chunk. Then a random case is chosen. If case 0, the title will be 1 word. If case 1, the title will be 2 words, etc etc
         string title = "";
         title += wordChunkList[Random.Range(0, wordChunkList.Count)];
         string[] fiveWordTitleString = title.Split(' ');
@@ -189,38 +191,50 @@ public class BookController : MonoBehaviour
     public string AddRandomPunctuation()
     {
         string punctuation = "";
-        //this array contains possible punctuation types. It is weighted to be a . than a ! or ?
+        //this array contains possible punctuation types. It is weighted to be a . more often than a ! or ?
         var punctuationOptions = new string[] { ".", "?", ".", ".", "!", "." };
         punctuation = punctuationOptions[UnityEngine.Random.Range(0, punctuationOptions.Length)];
         return punctuation;
     }
 
+    public string CapitalizeFirstLetterOfString(string chunkWithCapitalizedLetter)
+    {
+        //This function capitalizes the first letter of a new chunk. Useful right after adding a paragraph break.
+        string myNewString = "";
+        string firstLetter = chunkWithCapitalizedLetter[0].ToString();
+        chunkWithCapitalizedLetter = chunkWithCapitalizedLetter.Remove(0, 1);
+        chunkWithCapitalizedLetter = chunkWithCapitalizedLetter.Insert(0, firstLetter.ToUpper());
+        myNewString += chunkWithCapitalizedLetter;
+
+        return myNewString;
+    }
+
+    public string AddParagraphBreak(string chunkToSplit)
+    {
+        chunkToSplit = chunkToSplit.Remove(chunkToSplit.Length - 1); //this removes the last space so there's not an extraneous space
+        chunkToSplit += ".\n      ";
+
+        return chunkToSplit;
+    }
+
     public string FormatRandomBook()
     {
-        //this function randomly picks a case from this switch case, then formats the text accordingly.
+        //this function prints text to a text object. It randomly picks a case from the switch case, then formats the text accordingly.
+        //You can add as many cases as you want, or modify the existing ones.
         // 'text' is the string you should always be altering in the following cases.
         string text = "";
-        switch (UnityEngine.Random.Range(0, 5))
+        switch (UnityEngine.Random.Range(0, 6))
         {
             case 0:
-                //this case takes 5 random chunks, then inserts a paragraph break. It does this 4 times.
-                for (int i = 0; i < 4; i++)
+                //this case takes 2 random chunks, then inserts a paragraph break. It does this 2 times, then inserts 1 paragraph break and 1 chunk.
+                for (int i = 0; i < 2; i++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < 2; j++)
                     {
                         text += wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
                     }
-
-                    //this code removes the space from the last string, then adds a paragraph break.
-                    text = text.Remove(text.Length - 1);
-                    text += ".\n      ";
-                    //this code takes the first letter of the next string and capitalizes it.
-                    var capitalizedLetter = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    string firstLetter = capitalizedLetter[0].ToString();
-                    capitalizedLetter = capitalizedLetter.Remove(0, 1);
-                    capitalizedLetter = capitalizedLetter.Insert(0, firstLetter.ToUpper());
-                    text += capitalizedLetter;
-
+                    text = AddParagraphBreak(text);
+                    text += CapitalizeFirstLetterOfString(wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)]);
                 }
                 break;
             case 1:
@@ -232,44 +246,22 @@ public class BookController : MonoBehaviour
                 text += " " + twoWordString[1];
                 break;
             case 2:
-                //this case takes 4 random chunks
-                for (int i = 0; i < 4; i++)
-                {
-                    text += "I AM CASE 2.";
-                    text = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    text = text.Remove(text.Length - 1);
-                    text += ".\n      ";
-                    var newPar = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    string firstLetter = newPar[0].ToString();
-                    newPar = newPar.Remove(0, 1);
-                    newPar = newPar.Insert(0, firstLetter.ToUpper());
-                    text += newPar;
-                    text = text.Remove(text.Length - 1);
-                    text += AddRandomPunctuation();
-
-                }
+                //this case takes 1 random chunk, adds a line break, and then adds another chunk.
+                text = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
+                text = AddParagraphBreak(text);
+                text += CapitalizeFirstLetterOfString(wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)]);
+                text = text.Remove(text.Length - 1);
+                text += AddRandomPunctuation();
                 break;
             case 3:
                 //This case takes 5 random chunks, then inserts a paragraph break followed by a single chunk.
-                for (int i = 0; i < 5; i++)
+                for (int j = 0; j < 4; j++)
                 {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        text += wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    }
-
-                    //this next line of code removes the space from the last string, then adds random punctuation, then finally adds a paragraph break.
-                    text = text.Remove(text.Length - 1);
-                    text += AddRandomPunctuation() + "\n      ";
-                    //this next line of code takes the first letter of the next string and capitalizes it.
-                    string ChunkWithCapitalizedLetter = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    string firstLetter = ChunkWithCapitalizedLetter[0].ToString();
-                    ChunkWithCapitalizedLetter = ChunkWithCapitalizedLetter.Remove(0, 1);
-                    ChunkWithCapitalizedLetter = ChunkWithCapitalizedLetter.Insert(0, firstLetter.ToUpper());
-                    text += ChunkWithCapitalizedLetter;
-                    text = text.Remove(text.Length - 1);
-                    text += AddRandomPunctuation();
+                    text += wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
                 }
+                text = AddParagraphBreak(text);
+                text += CapitalizeFirstLetterOfString(wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)]);
+                text += AddRandomPunctuation();
                 break;
             case 4:
                 //this case takes 2 random chunks, then inserts a paragraph break. It does this 4 times.
@@ -279,42 +271,22 @@ public class BookController : MonoBehaviour
                     {
                         text += wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
                     }
-
-                    //this code removes the space from the last string, then adds a paragraph break.
-                    text = text.Remove(text.Length - 1);
-                    text += ".\n      ";
-                    //this code takes the first letter of the next string and capitalizes it.
-                    string ChunkWithCapitalizedLetter = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    string firstLetter = ChunkWithCapitalizedLetter[0].ToString();
-                    ChunkWithCapitalizedLetter = ChunkWithCapitalizedLetter.Remove(0, 1);
-                    ChunkWithCapitalizedLetter = ChunkWithCapitalizedLetter.Insert(0, firstLetter.ToUpper());
-                    text += ChunkWithCapitalizedLetter;
+                    text = AddParagraphBreak(text);
+                    text += CapitalizeFirstLetterOfString(wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)]);
                 }
-
                 break;
             case 5:
-                for (int i = 0; i < 6; i++)
+                //this case takes 3 random chunks, then adds a paragraph break. It does this 3 times, then adds a single paragraph break and a single chunk.
+                for (int i = 0; i < 3; i++)
                 {
-                    text = "I AM CASE 5.";
-
                     for (int j = 0; j < 3; j++)
                     {
                         text += wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
                     }
-
-                    //this code removes the space from the last string, then adds a paragraph break.
-                    text = text.Remove(text.Length - 1);
-                    text += ".\n      ";
-                    //this code takes the first letter of the next string and capitalizes it.
-                    var capitalizedLetter = wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)];
-                    string firstLetter = capitalizedLetter[0].ToString();
-                    capitalizedLetter = capitalizedLetter.Remove(0, 1);
-                    capitalizedLetter = capitalizedLetter.Insert(0, firstLetter.ToUpper());
-                    text += capitalizedLetter;
+                    text = AddParagraphBreak(text);
+                    text += CapitalizeFirstLetterOfString(wordChunkList[UnityEngine.Random.Range(0, wordChunkList.Count)]);
                 }
-
                 break;
-
         }
 
         return text;
